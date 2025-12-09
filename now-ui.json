@@ -1,0 +1,18 @@
+{
+  "components": {
+    "snc-threegs-viewer": {
+      "innerComponents": [],
+      "uiBuilder": {
+        "associatedTypes": [
+          "global.core",
+          "global.landing-page"
+        ],
+        "label": "3GS Viewer",
+        "tileIcon": "./tile-icon/generic-tile-icon.svg",
+        "description": "A 3GS Viewer",
+        "category": "primitives"
+      }
+    }
+  },
+  "scopeName": "x_snc_snc_threeg_0"
+}
