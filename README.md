@@ -1,4 +1,4 @@
-@snc/threegs-viewer
+3 GS Viewer Custom Component
 ===============================================
 A 3GS Viewer component
 

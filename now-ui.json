@@ -2,6 +2,17 @@
   "components": {
     "snc-threegs-viewer": {
       "innerComponents": [],
+      "properties": [
+        {
+          "name": "fileurl",
+          "label": "3GS File URL",
+          "description": "URL of the 3GS file to be loaded",
+          "fieldType": "string",
+          "required": false,
+          "readOnly": false,
+          "defaultValue": "https://empddraes.service-now.com/sys_attachment.do?sysparm_referring_url=tear_off&view=true&sys_id=1d6cddec87f17a107099cae50cbb35e1"
+        }
+      ],
       "uiBuilder": {
         "associatedTypes": [
           "global.core",
