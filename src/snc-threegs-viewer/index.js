@@ -24,10 +24,26 @@ const initScene = () => {
 	sceneState.scene.add(ambient);
 	const directional = new THREE.DirectionalLight(0xffffff, 0.6);
 	directional.position.set(1, 1, 1).normalize();
+	directional.castShadow = true;
+	directional.shadow.mapSize.width = 1024;
+	directional.shadow.mapSize.height = 1024;
 	sceneState.scene.add(directional);
+
+	// Add a bright spotlight focused on the scene center
+	const spot = new THREE.SpotLight(0xffffff, 3, 0, Math.PI / 8, 0.2, 1);
+	spot.position.set(0, 2, 2);
+	spot.target.position.set(0, 0, 0);
+	spot.castShadow = true;
+	spot.shadow.mapSize.width = 1024;
+	spot.shadow.mapSize.height = 1024;
+	spot.shadow.bias = -0.0001;
+	sceneState.scene.add(spot);
+	sceneState.scene.add(spot.target);
 
 	sceneState.renderer = new THREE.WebGLRenderer({ antialias: true });
 	sceneState.renderer.setPixelRatio(window.devicePixelRatio || 1);
+	sceneState.renderer.shadowMap.enabled = true;
+	sceneState.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 	sceneState.loader = new GLTFLoader();
 	sceneState.resizeObserver = null; // will be created per-container
 };
@@ -50,6 +66,14 @@ const loadModel = () => {
 		model.position.z -= center.z;
 
 		sceneState.scene.add(model);
+
+		// Ensure model meshes cast and receive shadows so spotlight is visible
+		model.traverse((child) => {
+			if (child.isMesh) {
+				child.castShadow = true;
+				child.receiveShadow = true;
+			}
+		});
 
 		// Fit camera to model
 		const size = box.getSize(new THREE.Vector3());
