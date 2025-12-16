@@ -105,6 +105,26 @@ This section will explain the steps required to make this component work. I will
 
         From now on, it is a matter of following the instructions of ThreeJs. I will spare us the part here, inspect my component and read the relevant documentation on ThreeJS. I personally started with the example in their [ThreeJS GitHub](https://github.com/mrdoob/three.js/) page.
 
+    1. Deploy to ServiceNow instance
+
+        Once you have a working version in the local environment, it is about time to deploy this component to ServiceNow. Before doing so, let's make sure we can find it later in UIB. 
         
+        1. For this, open ```now-ui.json```from the root level in the project folder. This file defines the name, description and other information like the icon used. Validate and or change the respective entries in the uiBilder section of that file:
 
+            ```
+            "uiBuilder": {
+                "associatedTypes": [
+                    "global.core",
+                    "global.landing-page"
+                    ],
+                "label": "3GS Viewer",
+                "tileIcon": "./tile-icon/generic-tile-icon.svg",
+                "description": "A 3GS Viewer",
+                "category": "primitives"
+            }
+            ````
+        1. In your terminal, run command ```snc ui-component deploy```, this might take a moment as it will compile all files in ServiceNow records and upload them to the instance. Once complete, we can go to UI Builder.
 
+        1. With the component deployed, you can find the component in UIB in the _Other_ section of components:
+
+            ![UIB Add Component Dialog](images/uib_add_component.png)
