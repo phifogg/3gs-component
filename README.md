@@ -44,7 +44,7 @@ You also need to install the ui-component extension to get all the features requ
 
 ### Start a new project / component
 
-A good reference to start building your own custom component is also on the [developer page](https://developer.servicenow.com/dev.do#!/reference/next-experience/xanadu/cli/development-flow).
+A good reference to start building your own custom component is also on the [developer page](https://developer>.servicenow.com/dev.do#!/reference/next-experience/xanadu/cli/development-flow).
 
 Here are the steps I followed for this repository:
 
@@ -74,24 +74,25 @@ Here are the steps I followed for this repository:
 
     The default generated component will be a simple hello world example. Let's change that to something bespoke for us. For this open the src/index.js file which was generated. This index.js file is the main content, but as you see, it only imports folders. So explore the folder mentioned and open the index.js from within that folder instead. This file should look something like:
 
-        import {createCustomElement} from '@servicenow/ui-core';
-        import snabbdom from '@servicenow/ui-renderer-snabbdom';
-        import styles from './styles.scss';
+    ```JavaScript
+    import {createCustomElement} from '@servicenow/ui-core';
+    import snabbdom from '@servicenow/ui-renderer-snabbdom';
+    import styles from './styles.scss';
 
-        const view = (state, {updateState}) => (
-            <div>
-                <h1>Example</h1>
-                <p>This is an example of a bare-bones component.</p>
-                <p>You might want to read the <a href ="https://developer.servicenow.com/dev.do#!/reference/next-experience/latest/ui-framework/getting-started/introduction">documentation</a> on the ServiceNow developer site.</p>
-            </div>
-        );
+    const view = (state, {updateState}) => (
+        <div>
+            <h1>Example</h1>
+            <p>This is an example of a bare-bones component.</p>
+            <p>You might want to read the <a href ="https://developer.servicenow.com/dev.do#!/reference/next-experience/latest/ui-framework/getting-started/introduction">documentation</a> on the ServiceNow developer site.</p>
+        </div>
+    );
 
-        createCustomElement('snc-hello-world', {
-            renderer: {type: snabbdom},
-            view,
-            styles
-        });
-        ```
+    createCustomElement('snc-hello-world', {
+        renderer: {type: snabbdom},
+        view,
+        styles
+    });
+    ```
 
     Change the ```<h1>Example</h1>``` to anything you like and re-run the test in your browser. Can you see the change? Good. This is where you can change the content of your component to anything you need it to be.
 
@@ -101,7 +102,9 @@ Here are the steps I followed for this repository:
 
     With that complete, we can load the library in the index.js file with
 
-        import * as THREE from 'three';
+    ```JavaScript
+    import * as THREE from 'three';
+    ```
 
     From now on, it is a matter of following the instructions of ThreeJs. I will spare us the part here, inspect my component and read the relevant documentation on ThreeJS. I personally started with the example in their [ThreeJS GitHub](https://github.com/mrdoob/three.js/) page.
 
@@ -111,18 +114,18 @@ Here are the steps I followed for this repository:
 
     1. For this, open ```now-ui.json```from the root level in the project folder. This file defines the name, description and other information like the icon used. Validate and or change the respective entries in the uiBilder section of that file:
 
-        {
-            "uiBuilder": {
-               "associatedTypes": [
-                    "global.core",
-                    "global.landing-page"
-                ],
-                "label": "3GS Viewer",
-                "tileIcon": "./tile-icon/generic-tile-icon.svg",
-                "description": "A 3GS Viewer",
-                "category": "primitives"
-            }
-        }
+    ```json
+    "uiBuilder": {
+       "associatedTypes": [
+            "global.core",
+            "global.landing-page"
+        ],
+        "label": "3GS Viewer",
+        "tileIcon": "./tile-icon/generic-tile-icon.svg",
+        "description": "A 3GS Viewer",
+        "category": "primitives"
+    }
+    ```
 
     1. In your terminal, run command ```snc ui-component deploy```, this might take a moment as it will compile all files in ServiceNow records and upload them to the instance. Once complete, we can go to UI Builder.
 
