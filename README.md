@@ -36,45 +36,45 @@ This section will explain the steps required to make this component work. I will
 
 ### ServiceNow CLI
 
-    You will need the [ServiceNow CLI](https://store.servicenow.com/store/app/ee71f36a1ba46a50a85b16db234bcbd4). If you have issues downloading it from the official store, there is also a GitHub repo at [@ServiceNow/servicenow-cli](https://github.com/ServiceNow/servicenow-cli) - just verify it has the latest version as it might not be updated as regularly as the store itself.
+You will need the [ServiceNow CLI](https://store.servicenow.com/store/app/ee71f36a1ba46a50a85b16db234bcbd4). If you have issues downloading it from the official store, there is also a GitHub repo at [@ServiceNow/servicenow-cli](https://github.com/ServiceNow/servicenow-cli) - just verify it has the latest version as it might not be updated as regularly as the store itself.
 
-    Follow this [guide](https://developer.servicenow.com/dev.do#!/reference/next-experience/xanadu/cli/getting-started) on how to install the CLI. It will also ask you to install NPM and NODE.JS in a specific version each. Make sure you have the extact version mentioned, otherwise the CLI will not work as it should.
+Follow this [guide](https://developer.servicenow.com/dev.do#!/reference/next-experience/xanadu/cli/getting-started) on how to install the CLI. It will also ask you to install NPM and NODE.JS in a specific version each. Make sure you have the extact version mentioned, otherwise the CLI will not work as it should.
 
-    You also need to install the ui-component extension to get all the features required for building custom UI components. The instructions are on the same page.
+You also need to install the ui-component extension to get all the features required for building custom UI components. The instructions are on the same page.
 
 ### Start a new project / component
 
-    A good reference to start building your own custom component is also on the [developer page](https://developer.servicenow.com/dev.do#!/reference/next-experience/xanadu/cli/development-flow).
+A good reference to start building your own custom component is also on the [developer page](https://developer.servicenow.com/dev.do#!/reference/next-experience/xanadu/cli/development-flow).
 
-    Here are the steps I followed for this repository:
+Here are the steps I followed for this repository:
 
-    1. Create a new folder on your local disk, name it _3gs-component_
+1. Create a new folder on your local disk, name it _3gs-component_
 
-    1. Open a terminal / command line in that folder
+1. Open a terminal / command line in that folder
 
-        I actually opened VS Code in that folder and used the terminal window within VS Code. Either way, we need to execute commands in that folder.
+    I actually opened VS Code in that folder and used the terminal window within VS Code. Either way, we need to execute commands in that folder.
 
-        1. Setup SNC connection to instance
+    1. Setup SNC connection to instance
 
-            Use command ```snc configure profile set``` to initialize the connection to ServiceNow. Basic Authentication with your regular ServiceNow developer account will do.
+        Use command ```snc configure profile set``` to initialize the connection to ServiceNow. Basic Authentication with your regular ServiceNow developer account will do.
 
-        1. Scaffold component files
+    1. Scaffold component files
 
-            Use command ```snc ui-component project --name @snc/3gs-component --description "A web component that renders 3D files."```
+        Use command ```snc ui-component project --name @snc/3gs-component --description "A web component that renders 3D files."```
 
-            Obviously name and description are free text choices, important is names cannot start with numbers and also cannot contain special characters. Once successful, this command will create a set of files and directories in your local store which serve as starting point for the component development.
+        Obviously name and description are free text choices, important is names cannot start with numbers and also cannot contain special characters. Once successful, this command will create a set of files and directories in your local store which serve as starting point for the component development.
 
-            Last step before we dig into the component, run ```npm install``` to have npm fetch all needed dependencies and prepare us for testing.
+        Last step before we dig into the component, run ```npm install``` to have npm fetch all needed dependencies and prepare us for testing.
 
-        1. Testing the component
+    1. Testing the component
 
-            You can test the component locally without the need to have a full ServiceNow instance. Running ```snc ui-component develop --open``` will start a local web server and direct your browser of choice to it. This is very useful, especially as it automatically updates the browser with any change you make on the files. The development server will keep running until you press 'Ctrl-C' in the terminal window.
+        You can test the component locally without the need to have a full ServiceNow instance. Running ```snc ui-component develop --open``` will start a local web server and direct your browser of choice to it. This is very useful, especially as it automatically updates the browser with any change you make on the files. The development server will keep running until you press 'Ctrl-C' in the terminal window.
 
-    1. Adding new HTML to the component
+1. Adding new HTML to the component
 
-        The default generated component will be a simple hello world example. Let's change that to something bespoke for us. For this open the src/index.js file which was generated. This index.js file is the main content, but as you see, it only imports folders. So explore the folder mentioned and open the index.js from within that folder instead. This file should look something like:
+    The default generated component will be a simple hello world example. Let's change that to something bespoke for us. For this open the src/index.js file which was generated. This index.js file is the main content, but as you see, it only imports folders. So explore the folder mentioned and open the index.js from within that folder instead. This file should look something like:
 
-        ```import {createCustomElement} from '@servicenow/ui-core';
+        import {createCustomElement} from '@servicenow/ui-core';
         import snabbdom from '@servicenow/ui-renderer-snabbdom';
         import styles from './styles.scss';
 
@@ -93,17 +93,17 @@ This section will explain the steps required to make this component work. I will
         });
         ```
 
-        Change the ```<h1>Example</h1>``` to anything you like and re-run the test in your browser. Can you see the change? Good. This is where you can change the content of your component to anything you need it to be.
+    Change the ```<h1>Example</h1>``` to anything you like and re-run the test in your browser. Can you see the change? Good. This is where you can change the content of your component to anything you need it to be.
 
-    1. Import Three.JS library
+1. Import Three.JS library
 
-        Now that we have a JavaScript file for our component, we need to let the environment know that we want to use Three.JS. First step is to install the library using npm, run ```npm install three.js```. This will load the necessary files and add them to the package.
+    Now that we have a JavaScript file for our component, we need to let the environment know that we want to use Three.JS. First step is to install the library using npm, run ```npm install three.js```. This will load the necessary files and add them to the package.
 
-        With that complete, we can load the library in the index.js file with
+    With that complete, we can load the library in the index.js file with
 
-        ```import * as THREE from 'three';```
+        import * as THREE from 'three';
 
-        From now on, it is a matter of following the instructions of ThreeJs. I will spare us the part here, inspect my component and read the relevant documentation on ThreeJS. I personally started with the example in their [ThreeJS GitHub](https://github.com/mrdoob/three.js/) page.
+    From now on, it is a matter of following the instructions of ThreeJs. I will spare us the part here, inspect my component and read the relevant documentation on ThreeJS. I personally started with the example in their [ThreeJS GitHub](https://github.com/mrdoob/three.js/) page.
 
 1. Deploy to ServiceNow instance
 
