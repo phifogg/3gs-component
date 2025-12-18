@@ -1,48 +1,48 @@
-3 GS Viewer Custom Component
-===============================================
-This is a custom component for ServiceNow based on the UX Framework. The component uses the https://threejs.org/ library to allow rendering of 3D files in a ServiceNow page. Here is an exmaple how this can look in its simplest form:
+# 3 GS Viewer Custom Component
+
+This is a custom component for ServiceNow based on the UX Framework. The component uses the [Three.JS](https://threejs.org/) library to allow rendering of 3D files in a ServiceNow page. Here is an exmaple how this can look in its simplest form:
 
 ![3GS Building](images\/3gs_building.gif)
 
 You may use this repo / component as instructional or inspirational, it has not been fully tested or vetted for a productive use. I am in no shape or form a professional when it comes to using the Three.js library and its functionality or its risks.
 
 Other resources to checkout:
+
 - [Next Experience Center of Excellence](https://www.servicenow.com/community/next-experience-articles/next-experience-center-of-excellence/ta-p/2332092) - This is the main place where our Developer Advocates post Next Experience, Workspace, and UI Builder enablement materials.
 - [ThreeJS](https://threejs.org/) - This is the library used in this component
 - [My NowBytes](https://www.youtube.com/@DanielNOWBytes/) - My YouTube chanel where I randomly post content around anyhting ServiceNow that I find interesting enough. No video on this component yet, but who knows. Let me know if I should do one.
 
+## Content
 
-Content
-========
 - [Why?](#why-)
 - [What?](#what-)
 - [How?](#how-)
 
-Why ?
-=====
+## Why ?
+
 Some time ago I was on a customer hackathon, always a great place and time to be with lovely and cretaive minds. One of these minds approached me and asked 'Can ServiceNow work with 3JS files?' I had no idea if, but I was pretty sure we can make it happen. The use case presented made sense and actually, I can see a lot of other use cases where this can be useful. Image you produce heavy machinery and want to help your technicans with detailed instructions on how to repair or maintain these, or you want to have a digital twin of your products or facilities ... could be used to navigate customers through the campus, right?
 
 Well, long story short, I was interessted and started digging around. This repository is one of the results.
 
-What ?
-=====
+## What ?
+
 Based on the customer request I wanted to create a component to be used on any modern UX Framework based page. The component needs to contain the 3JS viewer and render a defined 3D file. The file needs to be stored on ServiceNow.
 
 A custom component is for sure not a low-code capability anymore. You should be fine with command lines, VS Code (or similar) as editor and the general developer contexts of JavaScript.
 
-How ?
-=====
+## How ?
+
 This section will explain the steps required to make this component work. I will refer to other available instructions or resources where applicable.
 
-1. ServiceNow CLI
+### ServiceNow CLI
 
-    You will need the [ServiceNow CLI](https://store.servicenow.com/store/app/ee71f36a1ba46a50a85b16db234bcbd4). If you have issues downloading it from the official store, there is also a GitHub repo at [@ServiceNow/servicenow-cli](https://github.com/ServiceNow/servicenow-cli) - just verify it has the latest version as it might not be updated as regularly as the store itself. 
+    You will need the [ServiceNow CLI](https://store.servicenow.com/store/app/ee71f36a1ba46a50a85b16db234bcbd4). If you have issues downloading it from the official store, there is also a GitHub repo at [@ServiceNow/servicenow-cli](https://github.com/ServiceNow/servicenow-cli) - just verify it has the latest version as it might not be updated as regularly as the store itself.
 
     Follow this [guide](https://developer.servicenow.com/dev.do#!/reference/next-experience/xanadu/cli/getting-started) on how to install the CLI. It will also ask you to install NPM and NODE.JS in a specific version each. Make sure you have the extact version mentioned, otherwise the CLI will not work as it should.
 
     You also need to install the ui-component extension to get all the features required for building custom UI components. The instructions are on the same page.
 
-1. Start a new project / component
+### Start a new project / component
 
     A good reference to start building your own custom component is also on the [developer page](https://developer.servicenow.com/dev.do#!/reference/next-experience/xanadu/cli/development-flow).
 
@@ -51,7 +51,7 @@ This section will explain the steps required to make this component work. I will
     1. Create a new folder on your local disk, name it _3gs-component_
 
     1. Open a terminal / command line in that folder
-    
+
         I actually opened VS Code in that folder and used the terminal window within VS Code. Either way, we need to execute commands in that folder.
 
         1. Setup SNC connection to instance
@@ -79,17 +79,17 @@ This section will explain the steps required to make this component work. I will
         import styles from './styles.scss';
 
         const view = (state, {updateState}) => (
-	        <div>
-		        <h1>Example</h1>
-		        <p>This is an example of a bare-bones component.</p>
-		        <p>You might want to read the <a href ="https://developer.servicenow.com/dev.do#!/reference/next-experience/latest/ui-framework/getting-started/introduction">documentation</a> on the ServiceNow developer site.</p>
-	        </div>
+            <div>
+                <h1>Example</h1>
+                <p>This is an example of a bare-bones component.</p>
+                <p>You might want to read the <a href ="https://developer.servicenow.com/dev.do#!/reference/next-experience/latest/ui-framework/getting-started/introduction">documentation</a> on the ServiceNow developer site.</p>
+            </div>
         );
 
         createCustomElement('snc-hello-world', {
-	        renderer: {type: snabbdom},
-	        view,
-	        styles
+            renderer: {type: snabbdom},
+            view,
+            styles
         });
         ```
 
@@ -105,26 +105,29 @@ This section will explain the steps required to make this component work. I will
 
         From now on, it is a matter of following the instructions of ThreeJs. I will spare us the part here, inspect my component and read the relevant documentation on ThreeJS. I personally started with the example in their [ThreeJS GitHub](https://github.com/mrdoob/three.js/) page.
 
-    1. Deploy to ServiceNow instance
+1. Deploy to ServiceNow instance
 
-        Once you have a working version in the local environment, it is about time to deploy this component to ServiceNow. Before doing so, let's make sure we can find it later in UIB. 
-        
-        1. For this, open ```now-ui.json```from the root level in the project folder. This file defines the name, description and other information like the icon used. Validate and or change the respective entries in the uiBilder section of that file:
+    Once you have a working version in the local environment, it is about time to deploy this component to ServiceNow. Before doing so, let's make sure we can find it later in UIB.
 
-            ```
+    1. For this, open ```now-ui.json```from the root level in the project folder. This file defines the name, description and other information like the icon used. Validate and or change the respective entries in the uiBilder section of that file:
+
+        {
             "uiBuilder": {
-                "associatedTypes": [
+               "associatedTypes": [
                     "global.core",
                     "global.landing-page"
-                    ],
+                ],
                 "label": "3GS Viewer",
                 "tileIcon": "./tile-icon/generic-tile-icon.svg",
                 "description": "A 3GS Viewer",
                 "category": "primitives"
             }
-            ````
-        1. In your terminal, run command ```snc ui-component deploy```, this might take a moment as it will compile all files in ServiceNow records and upload them to the instance. Once complete, we can go to UI Builder.
+        }
 
-        1. With the component deployed, you can find the component in UIB in the _Other_ section of components:
+    1. In your terminal, run command ```snc ui-component deploy```, this might take a moment as it will compile all files in ServiceNow records and upload them to the instance. Once complete, we can go to UI Builder.
 
-            ![UIB Add Component Dialog](images/uib_add_component.png)
+    1. With the component deployed, you can find the component in UIB in the _Other_ section of components:
+
+        ![UIB Add Component Dialog](images/uib_add_component.png)
+
+1. Exposing a property
