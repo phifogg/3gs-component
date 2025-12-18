@@ -133,4 +133,50 @@ Here are the steps I followed for this repository:
 
         ![UIB Add Component Dialog](images/uib_add_component.png)
 
-1. Exposing a property
+1. Dynamically loading geometry
+
+The component works and renders a simple geometry. Next stop is to expose a property so we can specify a file to be loaded instead. For the property we need two changes to the files.
+
+1. now-ui.json
+
+    In this file we can define all properties to be exposed and their type specification. The generated file does not contain any property, you will need add this part to it. It belongs to the same level as the previously moddified uiBuilder property. Checkout [now-ui.json](now-ui.json) for its location in the structure.
+
+    ```json
+        "properties": [
+            {
+                "name": "fileurl",
+                "label": "3GS File URL",
+                "description": "URL of the 3GS file to be loaded",
+                "fieldType": "string",
+                "required": false,
+                "readOnly": false,
+                "defaultValue": "someurl"
+            }
+        ],
+    ```
+
+1. index.js
+
+    On the very end of the index.js file is a function call to createCustomElement, similar to the now-ui.json we need to add the property here as well.
+
+    ```JavaScript
+    createCustomElement('snc-threegs-viewer', {
+        view,
+        styles,
+        properties: {
+            fileurl: { schema: { type: 'string' }, default: 'someurl'}
+        }
+    });
+    ```
+
+    Next step is to use the url to load a geometry. For this we need to change the rendering code for ThreeJs. To be honest, I had not idea how this works so I asked GitHub's AI for help. It changed quite a bit on my code to make sure all the events and anchors are corrected. Essentially, the trick is to use GLTFLoader and make sure the scene rendered has defined light sources etc. I recommend to check out my final code piece at [index.js](src/snc-threegs-viewer/index.js).
+
+    With that in place, deploy the component again and test it out.
+
+    | 💡 Hint |
+    |---------|
+    | After deploying your component, make sure any already open browser window with UI Builder is refreshed. You might also need to clear UI Builder's cache. Within your page editor in UI builder, click the hamburger menu icon at the top-left, go to _Developer > Clear UI Builder Cache_.  You can also try clearing your local browser cache. |
+
+## Conclusion
+
+To create this component was a fun little exercise for me. I learned (or updated my knowledge) how to use the ServiceNow CLI, how to import basically any NPM library into a component and make it useable within ServiceNow. Rendering a full 3D file is definitely something I did not think of until I got asked by one of my customers. But that is exactly why I am working in the Creator space at ServiceNow - get interessting and challenging requirements that take our baseline capabilities to new levels. I hope you find this useful, please leave a message or comment in the issue tab on this repo if you have a great idea what to do with this component or have something to improve my repository. I love hearing from you.
