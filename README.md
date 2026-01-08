@@ -1,4 +1,4 @@
-# 3 GS Viewer Custom Component
+# 3 JS Viewer Custom Component
 
 This is a custom component for ServiceNow based on the UX Framework. The component uses the [Three.JS](https://threejs.org/) library to allow rendering of 3D files in a ServiceNow page. Here is an exmaple how this can look in its simplest form:
 

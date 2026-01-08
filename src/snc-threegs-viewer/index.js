@@ -116,7 +116,7 @@ const view = (state, {updateState}) => {
 
 	return (
 		<div>
-			<h1>My ThreeGS Viewer</h1>
+			<h1>My ThreeJS Viewer</h1>
 			{sceneState.fileUrl && <div>Loading model: {sceneState.fileUrl}</div>}
 			<div id="canvas-container" hook-insert={(vnode) => {
 				if (!vnode.elm.querySelector('canvas')) {
